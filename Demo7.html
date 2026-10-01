@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Abelito Tech — Automatización de procesos y software a medida · Cali, Colombia</title>
+<meta name="description" content="Automatizamos tareas manuales, consolidamos sus Excel y construimos software a medida para su empresa en Cali y el Valle. Diagnóstico gratuito."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ============================================================
+   DEMO 7 · EDICIÓN "INFORME DE EFICIENCIA"
+   Diseño editorial claro sobre la misma identidad de marca:
+   navy #0F172A · coral #FF6B4A · cyan #06B6D4 · emerald #10B981
+   Plus Jakarta Sans (display) + JetBrains Mono (datos/etiquetas)
+   ============================================================ */
+
+/* ============ SISTEMA BASE ============ */
+:root{
+  --paper:#FAF7F2; --paper-2:#FFFFFF; --paper-3:#F1ECE3;
+  --ink:#0F172A; --ink-2:#475569; --ink-3:#64748B;
+  --rule:rgba(15,23,42,.12); --rule-strong:rgba(15,23,42,.3);
+  --coral:#FF6B4A; --coral-hi:#FF8266; --coral-deep:#C94F33;
+  --coral-ink:#BC4327;            /* coral apto para texto sobre claro (AA) */
+  --cyan:#06B6D4; --cyan-ink:#0E7490;
+  --emerald:#10B981; --emerald-ink:#047857;
+  --wa:#25D366;
+  --font:'Plus Jakarta Sans',ui-sans-serif,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --r:14px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --hdr:126px;                    /* cintillo + barra de navegación */
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hdr) + 24px)}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:rgba(255,107,74,.3);color:var(--ink)}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--paper-3)}
+::-webkit-scrollbar-thumb{background:#D6CFC2;border-radius:5px}
+::-webkit-scrollbar-thumb:hover{background:#C4BBAC}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea{font-family:inherit}
+:focus-visible{outline:2px solid var(--coral-ink);outline-offset:2px;border-radius:4px}
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono)}
+.ic{width:18px;height:18px;stroke-width:1.8;flex:none}
+
+/* Accesibilidad y estados de sistema */
+.skip-link{position:fixed;left:16px;top:10px;z-index:500;transform:translateY(-180%);background:var(--coral);color:#160B07;padding:10px 14px;border-radius:8px;font-weight:800;transition:transform .2s}
+.skip-link:focus{transform:none}
+.noscript-banner{background:#FFF3CD;color:#3D2E00;padding:12px 24px;text-align:center;font-weight:700;font-size:14px}
+button:disabled{cursor:wait;opacity:.7}
+
+/* Aparición al hacer scroll */
+[data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0ms)}
+[data-reveal].in{opacity:1;transform:none}
+
+/* ============ CINTILLO EDITORIAL + NAVEGACIÓN ============ */
+.top{position:fixed;top:0;left:0;right:0;z-index:200}
+.strip{background:var(--ink);color:#CBD5E1;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;display:flex;justify-content:space-between;gap:16px;padding:9px 24px}
+.strip b{color:var(--coral);font-weight:600}
+.nav{background:var(--paper);border-bottom:1px solid var(--rule);transition:box-shadow .3s}
+.nav.scrolled{box-shadow:0 12px 30px -18px rgba(15,23,42,.35)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:92px}
+.brand{display:inline-flex;align-items:center}
+.logo-plate{display:inline-flex;align-items:center;background:none;padding:0;line-height:0}
+.logo-plate img{display:block;height:82px;width:auto;filter:url(#logoKey)}
+.logo-plate.sm img{height:120px}
+.logo-plate.xs img{height:18px}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{padding:8px 13px;font-size:14.5px;font-weight:600;color:var(--ink-2);border-radius:8px;transition:color .2s,background .2s;position:relative}
+.nav-links a:hover{color:var(--ink);background:rgba(15,23,42,.05)}
+.nav-links a.active{color:var(--ink)}
+.nav-links a.active::after{content:"";position:absolute;left:13px;right:13px;bottom:2px;height:2px;border-radius:2px;background:var(--coral)}
+.nav-cta-zone{display:flex;align-items:center;gap:12px}
+.nav-burger{display:none;width:42px;height:42px;border:1px solid var(--rule-strong);border-radius:9px;align-items:center;justify-content:center;color:var(--ink)}
+.nav-burger[aria-expanded="true"]{background:rgba(15,23,42,.08)}
+.mobile-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--paper-2);border-bottom:1px solid var(--rule);padding:14px 24px 22px;flex-direction:column;gap:4px;box-shadow:0 18px 34px -18px rgba(15,23,42,.18)}
+.mobile-menu.open{display:flex}
+.mobile-menu a{padding:12px 10px;font-weight:600;color:var(--ink-2);border-bottom:1px solid rgba(15,23,42,.06);border-radius:6px}
+.mobile-menu a:hover{color:var(--ink)}
+.mobile-menu .btn{margin-top:14px}
+
+/* ============ BOTONES ============ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:700;font-size:15px;border-radius:11px;padding:13px 24px;transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s,border-color .2s,color .2s;white-space:nowrap}
+.btn-primary{background:var(--coral);color:#160B07;box-shadow:0 10px 30px -12px rgba(201,79,51,.55)}
+.btn-primary:hover{background:var(--coral-hi);transform:translateY(-2px);box-shadow:0 16px 38px -12px rgba(201,79,51,.65)}
+.btn-primary:active{transform:translateY(0)}
+.btn-ghost{border:1px solid var(--rule-strong);color:var(--ink);background:var(--paper-2)}
+.btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+.btn-sm{padding:10px 18px;font-size:13.5px;border-radius:9px}
+.btn-block{width:100%}
+.btn .ic{width:17px;height:17px}
+.spinner{width:16px;height:16px;border:2px solid rgba(22,11,7,.3);border-top-color:#160B07;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ============ ETIQUETAS DE SECCIÓN (estilo editorial) ============ */
+.kicker{display:inline-flex;align-items:baseline;gap:10px;font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--coral-ink)}
+.kicker::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--coral);align-self:center}
+.kicker::after{content:attr(data-idx);color:var(--ink-3);letter-spacing:.08em}
+.kicker.cyan{color:var(--cyan-ink)} .kicker.cyan::before{background:var(--cyan)}
+.kicker.emerald{color:var(--emerald-ink)} .kicker.emerald::before{background:var(--emerald)}
+
+/* ============ SECCIONES ============ */
+.section{padding:104px 0}
+.sec-head{max-width:680px;margin-bottom:56px}
+.sec-head h2{font-size:clamp(2rem,3.6vw,2.85rem);line-height:1.14;letter-spacing:-.025em;font-weight:800;margin:18px 0 16px;color:var(--ink)}
+.sec-head p{color:var(--ink-2);font-size:16.5px}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.sec-head.center .kicker{justify-content:center}
+.rule-top{border-top:1px solid var(--rule)}
+
+/* ============ HERO ============ */
+.hero{padding:calc(var(--hdr) + 64px) 0 84px}
+.hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:64px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(188,67,39,.35);background:rgba(255,107,74,.09);color:var(--coral-ink);font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.04em;padding:7px 14px;border-radius:99px;margin-bottom:26px}
+.hero-badge .ic{width:14px;height:14px}
+.hero h1{font-size:clamp(2.5rem,5.1vw,4.1rem);line-height:1.06;letter-spacing:-.032em;font-weight:800;margin-bottom:24px}
+.hero h1 .hl{color:var(--coral-ink);background:linear-gradient(transparent 64%,rgba(255,107,74,.24) 64%)}
+.hero-sub{font-size:17.5px;color:var(--ink-2);max-width:540px;margin-bottom:34px}
+.hero-sub b{color:var(--ink);font-weight:600}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px}
+.hero-trust{display:flex;align-items:center;gap:18px;color:var(--ink-3);font-size:13px;font-family:var(--mono)}
+.hero-trust span{display:inline-flex;align-items:center;gap:7px}
+.hero-trust .ic{width:14px;height:14px;color:var(--emerald-ink)}
+
+/* Ficha lateral "nota al margen" — panel de automatización en vivo */
+.margin-card{background:var(--paper-2);border:1px solid var(--rule);border-top:4px solid var(--ink);border-radius:var(--r);padding:26px 28px;box-shadow:0 24px 50px -30px rgba(15,23,42,.25)}
+.mc-head{display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding-bottom:14px;border-bottom:1px solid var(--rule);margin-bottom:18px}
+.mc-head .live{display:inline-flex;align-items:center;gap:7px;color:var(--coral-ink)}
+.mc-head .live i{width:7px;height:7px;border-radius:50%;background:var(--coral);animation:pulse-dot 1.6s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.25}}
+.mc-rows{display:flex;flex-direction:column;gap:14px;margin-bottom:18px}
+.mc-row{display:flex;align-items:baseline;justify-content:space-between;gap:14px}
+.mc-row .l{font-size:13px;color:var(--ink-2)}
+.mc-row .v{font-family:var(--mono);font-size:17px;font-weight:600;color:var(--ink)}
+.mc-row .v.coral{color:var(--coral-ink)}
+.mc-row .v.cyan{color:var(--cyan-ink)}
+.mc-row .v.emerald{color:var(--emerald-ink)}
+.mc-row .v em{font-style:normal;font-size:.62em;color:var(--ink-3)}
+.mc-prog .ph{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--ink-2);margin-bottom:8px}
+.mc-track{height:7px;border-radius:99px;background:rgba(15,23,42,.08);overflow:hidden}
+.mc-fill{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--coral),var(--coral-hi));transition:width .12s linear}
+.mc-foot{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.08em;margin-top:16px;padding-top:14px;border-top:1px solid var(--rule)}
+
+/* ============ FRANJA FIRMA: ANTES → DESPUÉS ============ */
+.sweep{background:var(--ink);color:#F1F5F9;padding:78px 0}
+.sweep-grid{display:grid;grid-template-columns:1fr 120px 1fr;gap:34px;align-items:center}
+.sweep-tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.22em;margin-bottom:20px;color:#94A3B8}
+.sweep-tag.hot{color:var(--coral)}
+.sweep ul{display:flex;flex-direction:column;gap:14px}
+.sweep li{font-size:15.5px;color:#CBD5E1;position:relative;padding-left:2px;width:fit-content}
+.sweep li::after{content:"";position:absolute;left:-2px;right:-2px;top:54%;height:2px;background:var(--coral);transform:scaleX(0);transform-origin:left;transition:transform .55s var(--ease)}
+.sweep li:nth-child(1)::after{transition-delay:.15s}
+.sweep li:nth-child(2)::after{transition-delay:.4s}
+.sweep li:nth-child(3)::after{transition-delay:.65s}
+.sweep li:nth-child(4)::after{transition-delay:.9s}
+.sweep-col.in li::after{transform:scaleX(1)}
+.sweep-col.after li{color:#F8FAFC}
+.sweep-col.after li .ic{width:15px;height:15px;color:var(--emerald);margin-right:9px;vertical-align:-2px}
+.sweep-mid{display:flex;flex-direction:column;align-items:center;gap:10px;color:#64748B;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;text-align:center}
+.sweep-mid .ic{width:30px;height:30px;color:var(--coral);stroke-width:2}
+.sweep-line{width:1px;height:56px;background:linear-gradient(180deg,transparent,rgba(148,163,184,.4),transparent)}
+
+/* ============ MÉTRICAS ============ */
+.stats{padding:64px 0;border-bottom:1px solid var(--rule)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:6px 30px}
+.stat:first-child{padding-left:0}
+.stat + .stat{border-left:1px solid var(--rule)}
+.stat-num{font-family:var(--mono);font-size:clamp(28px,3vw,42px);font-weight:600;letter-spacing:-.03em;line-height:1.15;margin-bottom:8px}
+.stat-num.coral{color:var(--coral-ink)} .stat-num.cyan{color:var(--cyan-ink)} .stat-num.emerald{color:var(--emerald-ink)}
+.stat p{font-size:13.5px;color:var(--ink-3);line-height:1.5}
+
+/* ============ SERVICIOS (lista editorial) ============ */
+.svc-list{border-top:1px solid var(--rule)}
+.svc{border-bottom:1px solid var(--rule)}
+.svc-row{display:grid;grid-template-columns:110px 1fr 380px;gap:38px;padding:44px 0;align-items:start;transition:background .25s}
+.svc-row:hover{background:var(--paper-2)}
+.svc-idx{display:flex;flex-direction:column;gap:14px}
+.svc-num{font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.1em;color:var(--coral-ink)}
+.svc-icon{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:rgba(255,107,74,.1);border:1px solid rgba(255,107,74,.3);color:var(--coral-ink);transition:background .3s,color .3s}
+.svc-row:hover .svc-icon{background:var(--coral);color:#160B07;border-color:var(--coral)}
+.svc-main h3{font-size:21px;font-weight:700;letter-spacing:-.015em;margin-bottom:10px}
+.svc-main > p{color:var(--ink-2);font-size:15px;max-width:520px;margin-bottom:16px}
+.svc-main > p b{color:var(--ink);font-weight:600}
+.svc-link{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;color:var(--coral-ink);padding:4px 0}
+.svc-link .ic{width:15px;height:15px;transition:transform .25s var(--ease)}
+.svc-link:hover .ic{transform:translate(3px,-3px)}
+.svc-visual{min-width:0}
+
+/* mini chat de la card 01 */
+.chat{border:1px solid var(--rule);border-radius:12px;background:var(--paper-2);overflow:hidden}
+.chat-head{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding:9px 13px;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:8px}
+.chat-head .ic{width:13px;height:13px;color:var(--emerald-ink)}
+.chat-body{padding:14px 13px;display:flex;flex-direction:column;gap:9px;min-height:148px}
+.msg{max-width:82%;padding:8px 13px;border-radius:12px;font-size:13px;line-height:1.45;animation:msgin .35s var(--ease)}
+.msg.u{align-self:flex-end;background:var(--paper-3);border:1px solid var(--rule);border-bottom-right-radius:4px;color:var(--ink)}
+.msg.b{align-self:flex-start;background:rgba(16,185,129,.09);border:1px solid rgba(4,120,87,.3);border-bottom-left-radius:4px;color:#065F46}
+@keyframes msgin{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
+.typing{display:inline-flex;gap:4px;align-self:flex-start;padding:10px 14px;background:rgba(16,185,129,.09);border:1px solid rgba(4,120,87,.3);border-radius:12px;border-bottom-left-radius:4px}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--emerald-ink);animation:tp 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes tp{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+.chat-chips{display:flex;gap:8px;animation:msgin .4s var(--ease)}
+.chat-chips span{font-family:var(--mono);font-size:10.5px;color:var(--cyan-ink);border:1px solid rgba(14,116,144,.4);border-radius:99px;padding:5px 11px;cursor:default}
+
+/* consolidación de archivos card 02 */
+.files{display:flex;flex-direction:column;gap:7px}
+.filerow{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;color:var(--ink-2);border:1px solid var(--rule);border-radius:9px;padding:8px 12px;background:var(--paper-2);transition:border-color .3s,transform .3s}
+.filerow .ic{width:14px;height:14px;color:var(--cyan-ink)}
+.filerow.out{margin-left:22px;border-color:rgba(4,120,87,.4);color:var(--emerald-ink);background:rgba(16,185,129,.06)}
+.filerow.out .ic{color:var(--emerald-ink)}
+.svc-row:hover .filerow{transform:translateX(4px)}
+.svc-row:hover .filerow.out{transform:translateX(-4px)}
+.filerow .arrow{margin-left:auto;color:var(--ink-3)}
+
+/* chips de stack */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{font-family:var(--mono);font-size:11px;color:var(--ink-2);border:1px solid var(--rule-strong);border-radius:7px;padding:5px 10px;transition:color .25s,border-color .25s;background:var(--paper-2)}
+.svc-row:hover .chips span{color:var(--ink);border-color:var(--ink-3)}
+
+/* tickets card 04 */
+.tickets{display:flex;flex-direction:column;gap:8px}
+.ticket{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;border:1px solid var(--rule);border-radius:9px;padding:8px 11px;background:var(--paper-2)}
+.ticket .tid{color:var(--ink-3)}
+.ticket .tdesc{color:var(--ink-2);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tstate{font-size:9.5px;letter-spacing:.08em;padding:3px 8px;border-radius:5px;flex:none}
+.tstate.open{color:var(--coral-ink);background:rgba(255,107,74,.1);border:1px solid rgba(188,67,39,.35)}
+.tstate.wip{color:var(--cyan-ink);background:rgba(6,182,212,.08);border:1px solid rgba(14,116,144,.35)}
+.tstate.done{color:var(--emerald-ink);background:rgba(16,185,129,.1);border:1px solid rgba(4,120,87,.35)}
+
+/* badge garantía card 05 */
+.hw-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--emerald-ink);border:1px solid rgba(4,120,87,.35);background:rgba(16,185,129,.07);border-radius:8px;padding:7px 12px;margin-bottom:16px;align-self:flex-start}
+.hw-badge .ic{width:13px;height:13px}
+
+/* ============ CASOS DE ÉXITO (pull-quotes) ============ */
+.cases{background:var(--paper-3)}
+.case-list{border-top:1px solid var(--rule)}
+.case-row{display:grid;grid-template-columns:1fr auto;gap:44px;align-items:center;padding:36px 6px;border-bottom:1px solid var(--rule)}
+.case-sector{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan-ink);margin-bottom:10px}
+.case-quote{font-size:clamp(18px,2.2vw,24px);font-weight:600;letter-spacing:-.012em;line-height:1.42;margin-bottom:12px;max-width:640px}
+.case-quote::before{content:"“";color:var(--coral-ink)} .case-quote::after{content:"”";color:var(--coral-ink)}
+.case-author{font-size:13.5px;color:var(--ink-3)}
+.case-metric{text-align:right;min-width:170px}
+.case-metric .v{font-family:var(--mono);font-size:clamp(30px,3.4vw,44px);font-weight:600;letter-spacing:-.03em;color:var(--coral-ink)}
+.case-metric .v.cy{color:var(--cyan-ink)} .case-metric .v.em{color:var(--emerald-ink)}
+.case-metric .l{font-size:12.5px;color:var(--ink-3);max-width:180px;margin-left:auto}
+
+/* ============ CALCULADORA ROI (bloque invertido) ============ */
+.roi-sec{background:var(--ink);color:#F1F5F9}
+.roi-sec .sec-head h2{color:#F8FAFC}
+.roi-sec .sec-head p{color:#94A3B8}
+.roi-sec .kicker{color:var(--coral)} .roi-sec .kicker::before{background:var(--coral)}
+.roi-sec .kicker::after{color:#64748B}
+.roi-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:stretch}
+.roi-panel{border:1px solid rgba(148,163,184,.28);border-radius:var(--r);background:rgba(255,255,255,.05);padding:34px}
+.roi-field{margin-bottom:30px}
+.roi-label{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;gap:14px}
+.roi-label label{font-weight:700;font-size:15px;color:#F1F5F9}
+.roi-label .val{font-family:var(--mono);font-size:14px;font-weight:600;color:var(--coral);background:rgba(255,107,74,.12);border:1px solid rgba(255,107,74,.35);border-radius:7px;padding:4px 11px;white-space:nowrap}
+.roi-label .val.cy{color:#67E8F9;background:rgba(6,182,212,.1);border-color:rgba(6,182,212,.35)}
+.range{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:99px;background:linear-gradient(90deg,var(--acc,#FF6B4A) var(--p,50%),rgba(148,163,184,.28) var(--p,50%));outline-offset:6px;cursor:pointer}
+.range::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#FFFFFF;border:3px solid var(--acc,#FF6B4A);box-shadow:0 3px 10px rgba(2,6,23,.45);cursor:grab}
+.range::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#FFFFFF;border:3px solid var(--acc,#FF6B4A);box-shadow:0 3px 10px rgba(2,6,23,.45);cursor:grab}
+.range-accents{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:#94A3B8;margin-top:10px}
+.roi-note{font-size:12px;color:#94A3B8;line-height:1.55;border-left:2px solid rgba(148,163,184,.35);padding-left:14px}
+.roi-out{border-radius:var(--r);background:var(--paper-2);color:var(--ink);border-top:4px solid var(--coral);padding:34px;display:flex;flex-direction:column;box-shadow:0 30px 60px -30px rgba(2,6,23,.6)}
+.roi-out-head{display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);padding-bottom:18px;border-bottom:1px solid var(--rule);margin-bottom:24px}
+.roi-out-head .st{display:inline-flex;align-items:center;gap:7px;color:var(--coral-ink)}
+.roi-out-head .st i{width:7px;height:7px;border-radius:50%;background:var(--coral);animation:pulse-dot 1.6s infinite}
+.roi-big{margin-bottom:24px}
+.roi-big .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.roi-big .num{font-family:var(--mono);font-weight:600;letter-spacing:-.03em;line-height:1.05;font-size:clamp(30px,3.6vw,44px);color:var(--cyan-ink)}
+.roi-big .num.money{color:var(--emerald-ink)}
+.roi-big .num small{font-size:.45em;color:var(--ink-3);font-weight:500;letter-spacing:0}
+.roi-equiv{font-size:14px;color:var(--ink-2);margin-bottom:26px;padding:14px 16px;border:1px dashed var(--rule-strong);border-radius:10px}
+.roi-equiv b{color:var(--ink)}
+.roi-out .btn{margin-top:auto}
+
+/* ============ PLANES ============ */
+.p-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.p-card{border:1px solid var(--rule);border-radius:var(--r);background:var(--paper-2);padding:30px;position:relative;display:flex;flex-direction:column;transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s}
+.p-card:hover{transform:translateY(-4px);border-color:var(--ink-3);box-shadow:0 26px 54px -30px rgba(15,23,42,.35)}
+.p-name{font-size:19px;font-weight:800;letter-spacing:-.015em;margin-bottom:8px}
+.p-tag{font-size:13.5px;color:var(--ink-3);margin-bottom:20px;min-height:42px}
+.p-price{display:flex;align-items:baseline;gap:10px;margin-bottom:22px;padding-bottom:20px;border-bottom:1px solid var(--rule)}
+.p-price .v{font-family:var(--mono);font-size:38px;font-weight:600;letter-spacing:-.03em;color:var(--ink)}
+.p-price .u{font-size:12px;color:var(--ink-3);font-family:var(--mono)}
+.p-features{display:flex;flex-direction:column;gap:12px;margin-bottom:26px}
+.p-features li{display:flex;gap:10px;font-size:14px;color:var(--ink-2);align-items:flex-start}
+.p-features .ic{width:16px;height:16px;color:var(--emerald-ink);margin-top:3px}
+.p-features b{color:var(--ink);font-weight:600}
+.p-badge{position:absolute;top:-13px;left:26px;background:var(--coral);color:#160B07;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.14em;padding:6px 12px;border-radius:99px}
+.p-card.pop{background:var(--ink);border-color:var(--ink);color:#F1F5F9}
+.p-card.pop .p-tag{color:#94A3B8}
+.p-card.pop .p-price{border-color:rgba(148,163,184,.25)}
+.p-card.pop .p-price .v{color:#F8FAFC}
+.p-card.pop .p-price .u{color:#94A3B8}
+.p-card.pop .p-features li{color:#CBD5E1}
+.p-card.pop .p-features .ic{color:var(--emerald)}
+.p-card.pop .p-features b{color:#F8FAFC}
+.p-card.pop .btn-ghost{background:transparent;border-color:rgba(148,163,184,.4);color:#F1F5F9}
+.p-card.pop .btn-ghost:hover{border-color:#F1F5F9}
+.p-note{text-align:center;font-family:var(--mono);font-size:12.5px;color:var(--ink-3);margin-top:34px}
+.p-note b{color:var(--ink-2)}
+
+/* ============ CONTACTO ============ */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.contact-list{display:flex;flex-direction:column;gap:13px;margin:26px 0 30px}
+.contact-list li{display:flex;gap:10px;font-size:14.5px;color:var(--ink-2);align-items:flex-start}
+.contact-list .ic{width:16px;height:16px;color:var(--emerald-ink);margin-top:3px}
+.contact-list b{color:var(--ink)}
+.direct{display:flex;flex-direction:column;gap:12px}
+.direct a{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:15px;color:var(--ink-2);transition:color .2s}
+.direct a .ic{width:16px;height:16px;color:var(--coral-ink)}
+.direct a:hover{color:var(--ink)}
+.form-card{background:var(--paper-2);border:1px solid var(--rule);border-radius:16px;padding:34px;box-shadow:0 30px 60px -38px rgba(15,23,42,.35)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f-group{margin-bottom:18px;display:flex;flex-direction:column}
+.f-group label{font-weight:700;font-size:13.5px;margin-bottom:8px;color:var(--ink)}
+.f-group input,.f-group textarea{border:1px solid rgba(15,23,42,.2);border-radius:10px;padding:12px 14px;font-size:14.5px;color:var(--ink);background:var(--paper-2);transition:border-color .2s,box-shadow .2s;resize:vertical}
+.f-group input:focus,.f-group textarea:focus{outline:none;border-color:var(--coral-ink);box-shadow:0 0 0 3px rgba(255,107,74,.15)}
+.f-group .f-msg{display:none;font-size:12px;color:var(--coral-ink);margin-top:6px}
+.f-group.err input,.f-group.err textarea{border-color:var(--coral);background:rgba(255,107,74,.05)}
+.f-group.err .f-msg{display:block}
+.form-hint{font-size:12px;color:var(--ink-3);text-align:center;margin-top:14px}
+
+/* ============ FOOTER (navy, inverso editorial) ============ */
+.footer{background:var(--ink);color:#CBD5E1;padding:72px 0 0}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:44px;padding-bottom:52px}
+.footer h4{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#64748B;margin-bottom:18px}
+.footer-brand{display:flex;flex-direction:column;align-items:flex-start}
+.footer-brand p{color:#94A3B8;font-size:14px;margin-top:18px;max-width:300px}
+.footer ul{display:flex;flex-direction:column;gap:11px}
+.footer ul a{color:#94A3B8;font-size:14px;transition:color .2s}
+.footer ul a:hover{color:#F8FAFC}
+.footer-bottom{border-top:1px solid rgba(148,163,184,.18);padding:22px 0;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:#64748B}
+.footer-bottom .mono{font-size:12px}
+
+/* ============ WHATSAPP FLOTANTE ============ */
+.wa-float{position:fixed;right:26px;bottom:26px;z-index:180;display:flex;align-items:center}
+.wa-tip{background:var(--paper-2);border:1px solid var(--rule);color:var(--ink);font-size:12.5px;font-weight:700;padding:9px 13px;border-radius:10px;margin-right:12px;box-shadow:0 14px 30px -14px rgba(15,23,42,.4);opacity:0;transform:translateX(8px);transition:opacity .25s,transform .25s;pointer-events:none}
+.wa-tip .mono{display:block;font-size:10px;color:var(--ink-3);font-weight:400}
+.wa-float:hover .wa-tip{opacity:1;transform:none}
+.wa-btn{width:56px;height:56px;border-radius:50%;background:var(--wa);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 16px 34px -12px rgba(37,211,102,.65);transition:transform .2s var(--ease)}
+.wa-btn:hover{transform:translateY(-3px)}
+.wa-btn .ic{width:24px;height:24px}
+
+/* ============ MODALES ============ */
+.modal-bg{position:fixed;inset:0;z-index:300;background:rgba(15,23,42,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:22px}
+.modal-bg.open{display:flex}
+.modal{background:var(--paper-2);color:var(--ink);border-radius:16px;padding:38px;max-width:520px;width:100%;position:relative;box-shadow:0 40px 90px -30px rgba(2,6,23,.6);max-height:92vh;overflow:auto}
+.modal h3{font-size:22px;font-weight:800;letter-spacing:-.02em;margin:14px 0 8px;line-height:1.25}
+.msub{font-size:14.5px;color:var(--ink-2);margin-bottom:22px}
+.m-bullets{display:flex;flex-direction:column;gap:12px;margin-bottom:26px}
+.m-bullets li{display:flex;gap:10px;font-size:14px;color:var(--ink-2);align-items:flex-start}
+.m-bullets .ic{width:16px;height:16px;color:var(--emerald-ink);margin-top:3px}
+.m-bullets b{color:var(--ink)}
+.m-actions{display:flex;flex-direction:column;gap:10px}
+.m-meta{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ink-3);margin-top:20px;justify-content:center}
+.m-meta .ic{width:13px;height:13px}
+.modal-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--ink-3);transition:background .2s,color .2s}
+.modal-close:hover{background:rgba(15,23,42,.06);color:var(--ink)}
+
+/* ============ MODAL DEMO .EXE ============ */
+.modal.exe{max-width:720px;padding:0;overflow:hidden}
+.exe-titlebar{display:flex;align-items:center;gap:12px;background:var(--paper-3);border-bottom:1px solid var(--rule);padding:10px 14px}
+.exe-name{font-family:var(--mono);font-size:12px;color:var(--ink-2);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.exe-ctrl{display:flex;gap:6px}
+.exe-ctrl button{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--ink-2);transition:background .2s,color .2s}
+.exe-ctrl button:hover{background:rgba(15,23,42,.08);color:var(--ink)}
+.exe-ctrl .close:hover{background:rgba(201,79,51,.15);color:var(--coral-ink)}
+.exe-body{padding:22px}
+.exe-prog{display:flex;justify-content:space-between;font-size:13.5px;font-weight:600;margin-bottom:10px;gap:14px}
+.exe-prog .mono{color:var(--coral-ink)}
+.exe-track{height:8px;border-radius:99px;background:rgba(15,23,42,.08);overflow:hidden;margin-bottom:16px}
+.exe-fill{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--coral),var(--coral-hi));transition:width .2s linear}
+.console{background:#0B1120;color:#CBD5E1;font-family:var(--mono);font-size:12px;line-height:1.75;border-radius:10px;padding:16px;height:240px;overflow-y:auto;margin-bottom:16px}
+.console .cl{display:flex;gap:12px}
+.console .ts{color:#475569;flex:none}
+.console .cl.info .tx{color:#7DD3FC}
+.console .cl.ok .tx{color:#6EE7B7}
+.console .tx b{color:#F8FAFC;font-weight:600}
+.exe-foot{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.exe-status{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--coral-ink)}
+.exe-status i{width:7px;height:7px;border-radius:50%;background:var(--coral);animation:pulse-dot 1.4s infinite}
+.exe-status.done{color:var(--emerald-ink)}
+.exe-status.done i{background:var(--emerald-ink);animation:none}
+.exe-rerun{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:13px;color:var(--ink-2);border:1px solid var(--rule-strong);border-radius:9px;padding:8px 14px;transition:color .2s,border-color .2s,background .2s;opacity:.55;pointer-events:none}
+.exe-rerun .ic{width:14px;height:14px}
+.exe-rerun.ready{opacity:1;pointer-events:auto;color:var(--coral-ink);border-color:rgba(188,67,39,.4)}
+.exe-rerun.ready:hover{background:rgba(255,107,74,.08)}
+.modal.exe{transition:transform .3s var(--ease),opacity .3s}
+.modal.exe.mini{transform:scale(.9) translateY(45%);opacity:.65}
+.modal.exe.maxi{max-width:min(1100px,96vw)}
+
+/* ============ TOASTS ============ */
+.toasts{position:fixed;top:20px;right:20px;z-index:400;display:flex;flex-direction:column;gap:12px;max-width:380px}
+.toast{display:flex;gap:13px;align-items:flex-start;background:var(--paper-2);border:1px solid var(--rule-strong);border-left:3px solid var(--emerald-ink);border-radius:12px;padding:15px 17px;box-shadow:0 22px 46px -14px rgba(15,23,42,.35);animation:toastin .4s var(--ease)}
+.toast.warn{border-left-color:var(--coral)}
+.toast .t-ic{width:34px;height:34px;border-radius:9px;background:rgba(16,185,129,.12);color:var(--emerald-ink);display:flex;align-items:center;justify-content:center;flex:none}
+.toast.warn .t-ic{background:rgba(255,107,74,.12);color:var(--coral-ink)}
+.toast .t-tx b{display:block;font-size:14.5px;font-weight:700;margin-bottom:3px}
+.toast .t-tx p{font-size:13px;color:var(--ink-2);line-height:1.45}
+.toast .t-act{display:inline-flex;align-items:center;gap:6px;margin-top:9px;font-size:12.5px;font-weight:700;color:var(--emerald-ink)}
+.toast .t-act:hover{text-decoration:underline}
+.toast .t-x{margin-left:auto;color:var(--ink-3);flex:none}
+.toast .t-x:hover{color:var(--ink)}
+.toast .t-x .ic{width:15px;height:15px}
+.toast.out{animation:toastout .3s var(--ease) forwards}
+@keyframes toastin{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+@keyframes toastout{to{opacity:0;transform:translateX(30px)}}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:1080px){
+  .svc-row{grid-template-columns:80px 1fr;grid-template-rows:auto auto}
+  .svc-visual{grid-column:2}
+  .sweep-grid{grid-template-columns:1fr 1fr}
+  .sweep-mid{flex-direction:row;grid-column:1/-1;justify-content:center}
+  .sweep-line{width:56px;height:1px;background:linear-gradient(90deg,transparent,rgba(148,163,184,.4),transparent)}
+}
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr;gap:54px}
+  .roi-wrap{grid-template-columns:1fr}
+  .p-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto}
+  .contact-wrap{grid-template-columns:1fr;gap:44px}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .stats-grid{grid-template-columns:1fr 1fr;gap:0}
+  .stat{padding:26px 22px}
+  .stat:nth-child(odd){border-left:none;padding-left:0}
+  .stat:nth-child(n+3){border-top:1px solid var(--rule)}
+  .stat:first-child{padding-top:0}
+  .case-row{grid-template-columns:1fr;gap:16px}
+  .case-metric{text-align:left}
+  .case-metric .l{margin-left:0}
+  .p-card.pop{order:-1}
+}
+@media (max-width:900px){
+  .nav-links{display:none}
+  .nav-burger{display:flex}
+}
+@media (max-width:640px){
+  :root{--hdr:118px}
+  .section{padding:80px 0}
+  .hero{padding-top:calc(var(--hdr) + 44px)}
+  .nav-inner{height:82px}
+  .logo-plate img{height:66px}
+  .strip{font-size:9px;letter-spacing:.1em;padding:8px 16px}
+  .strip .strip-r{display:none}
+  .hero h1{font-size:clamp(2.1rem,8.4vw,2.7rem)}
+  .hero-ctas .btn{width:100%}
+  .svc-row{grid-template-columns:1fr;gap:20px;padding:34px 0}
+  .svc-visual{grid-column:1}
+  .svc-idx{flex-direction:row;align-items:center}
+  .stats-grid{grid-template-columns:1fr}
+  .stat{padding:22px 0;border-left:none!important;border-top:1px solid var(--rule)}
+  .stat:first-child{border-top:none;padding-top:0}
+  .footer-grid{grid-template-columns:1fr;gap:34px}
+  .f-row{grid-template-columns:1fr}
+  .wa-float{right:16px;bottom:16px}
+  .wa-tip{display:none}
+  .toasts{left:16px;right:16px;top:16px;max-width:none}
+  .toast{padding:13px 14px}
+  .footer-brand .logo-plate.sm img{height:96px}
+  .modal{padding:30px 24px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  [data-reveal]{opacity:1;transform:none}
+  .sweep li::after{transform:scaleX(1)!important}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+<noscript><div class="noscript-banner">Este demo funciona mejor con JavaScript activado para mostrar la calculadora y las interacciones.</div></noscript>
+
+<!-- ============ FILTRO DEL LOGO ============
+     Convierte el fondo blanco del JPG en transparencia, SIN tocar los colores
+     del logo. Sobre el marfil y el navy el resultado es limpio y el logo
+     conserva sus colores exactos. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="logoKey" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%">
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -1 -1 -1 3 0" result="keyed"/>
+      <feComponentTransfer in="keyed">
+        <feFuncR type="identity"/>
+        <feFuncG type="identity"/>
+        <feFuncB type="identity"/>
+        <feFuncA type="gamma" amplitude="1" exponent="2" offset="0"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ================= CINTILLO + NAVEGACIÓN ================= -->
+<header class="top" id="nav">
+  <div class="strip">
+    <span>Abelito Tech · Informe de eficiencia</span>
+    <span class="strip-r">SLA &lt; 15 MIN · ITIL · <b>CALI, COLOMBIA</b></span>
+  </div>
+  <nav class="nav" aria-label="Barra principal">
+    <div class="container nav-inner">
+      <!-- LOGO OFICIAL · Imagen original sin retocar; el filtro #logoKey elimina el fondo blanco del JPG. -->
+      <a href="#" class="brand">
+        <span class="logo-plate">
+          <img src="assets/logo-abelito-tech.jpg" alt="Abelito Tech"
+               onerror="this.onerror=null;this.src='https://z-cdn-media.chatglm.cn/files/ff91708a-c2dd-4623-839b-6d835f52b555.jpg?auth_key=1890713018-542905ce0d644c46ab7c2bd015d86a4a-0-e442c5f907bd8dc04e184fdafab5c4b0'"/>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Principal">
+        <a href="#servicios">Servicios</a>
+        <a href="#automatizaciones">Automatizaciones</a>
+        <a href="#casos">Casos de Éxito</a>
+        <a href="#planes">Planes</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="nav-cta-zone">
+        <button class="btn btn-primary btn-sm" data-open-modal="modalDiag">Agendar Diagnóstico Gratuito</button>
+        <button class="nav-burger" id="burger" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false"><i data-lucide="menu" class="ic"></i></button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" aria-label="Menú móvil">
+      <a href="#servicios">Servicios</a>
+      <a href="#automatizaciones">Automatizaciones</a>
+      <a href="#casos">Casos de Éxito</a>
+      <a href="#planes">Planes</a>
+      <a href="#contacto">Contacto</a>
+      <button class="btn btn-primary" data-open-modal="modalDiag">Agendar Diagnóstico Gratuito</button>
+    </div>
+  </nav>
+</header>
+
+<main id="contenido">
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="hero-badge" data-reveal><i data-lucide="zap" class="ic"></i>Automatización de Procesos &amp; Soluciones TI en Cali y el Valle</span>
+      <h1 data-reveal style="--d:80ms">Transformamos tareas manuales en <span class="hl">procesos automáticos</span> para su empresa.</h1>
+      <p class="hero-sub" data-reveal style="--d:160ms">Ahorre hasta <b>20 horas al mes</b> en reportes, consolidación de Excel, bases de datos y soporte técnico. Software a medida y tecnología administrada <b>sin complicaciones</b>.</p>
+      <div class="hero-ctas" data-reveal style="--d:240ms">
+        <button class="btn btn-primary" data-open-modal="modalDiag">Solicitar Diagnóstico Sin Costo<i data-lucide="arrow-right" class="ic"></i></button>
+        <button class="btn btn-ghost" data-open-modal="modalDemo"><i data-lucide="play" class="ic"></i>Ver Demo de Software (.exe)</button>
+      </div>
+      <div class="hero-trust" data-reveal style="--d:320ms">
+        <span><i data-lucide="timer" class="ic"></i>Respuesta &lt; 15 min</span>
+        <span><i data-lucide="map-pin" class="ic"></i>Cali · Valle del Cauca</span>
+      </div>
+    </div>
+
+    <!-- Nota al margen: panel de automatización en vivo -->
+    <aside class="margin-card" data-reveal style="--d:180ms" aria-label="Panel de automatización en vivo">
+      <div class="mc-head">
+        <span>Panel de automatización</span>
+        <span class="live"><i></i>EN VIVO</span>
+      </div>
+      <div class="mc-rows">
+        <div class="mc-row"><span class="l">Horas ahorradas /mes</span><span class="v coral" id="mHoras">23.5 h</span></div>
+        <div class="mc-row"><span class="l">Docs procesados hoy</span><span class="v cyan" id="mDocs">128</span></div>
+        <div class="mc-row"><span class="l">SLA de respuesta</span><span class="v emerald">14:32 <em>min</em></span></div>
+        <div class="mc-row"><span class="l">Backup PostgreSQL</span><span class="v emerald">OK <em>· hace 4 min</em></span></div>
+      </div>
+      <div class="mc-prog">
+        <div class="ph"><span>Consolidación Excel — 14 sedes</span><span id="progPct">0%</span></div>
+        <div class="mc-track"><div class="mc-fill" id="progFill"></div></div>
+      </div>
+      <div class="mc-foot">n8n · python · .exe · hace 2 min</div>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= FRANJA FIRMA: ANTES → DESPUÉS ================= -->
+<section class="sweep" aria-label="Antes y después de automatizar">
+  <div class="container sweep-grid">
+    <div class="sweep-col" data-reveal>
+      <span class="sweep-tag">Antes · trabajo manual</span>
+      <ul class="sw-strike">
+        <li>Unir 14 hojas de cálculo a mano, cada viernes</li>
+        <li>Copiar y pegar el mismo reporte una y otra vez</li>
+        <li>Buscar qué ticket quedó sin resolver</li>
+        <li>Perder ventas por mensajes sin respuesta</li>
+      </ul>
+    </div>
+    <div class="sweep-mid" aria-hidden="true">
+      <span class="sweep-line"></span>
+      <i data-lucide="arrow-right" class="ic"></i>
+      <span>Proceso<br/>automatizado</span>
+      <span class="sweep-line"></span>
+    </div>
+    <div class="sweep-col after" data-reveal style="--d:200ms">
+      <span class="sweep-tag hot">Después · con Abelito Tech</span>
+      <ul>
+        <li><i data-lucide="check" class="ic"></i>Un clic y un café, 7:00 a.m.</li>
+        <li><i data-lucide="check" class="ic"></i>Reporte consolidado en el WhatsApp del gerente</li>
+        <li><i data-lucide="check" class="ic"></i>Tickets trazados · backups · SLA &lt; 15 min</li>
+        <li><i data-lucide="check" class="ic"></i>Bot respondiendo a sus clientes 24/7</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MÉTRICAS ================= -->
+<section class="stats" id="stats">
+  <div class="container stats-grid" id="statsGrid">
+    <div class="stat" data-reveal>
+      <div class="stat-num coral">+<span data-count="85">0</span>%</div>
+      <p>Reducción de tiempo en tareas manuales repetitivas</p>
+    </div>
+    <div class="stat" data-reveal style="--d:90ms">
+      <div class="stat-num cyan"><span data-count="100">0</span>%</div>
+      <p>Ejecutables visuales .exe — cero terminales para su equipo</p>
+    </div>
+    <div class="stat" data-reveal style="--d:180ms">
+      <div class="stat-num emerald">&lt;<span data-count="15">0</span> min</div>
+      <p>SLA de primera respuesta en mesa de ayuda</p>
+    </div>
+    <div class="stat" data-reveal style="--d:270ms">
+      <div class="stat-num coral">+<span data-count="30">0</span></div>
+      <p>Procesos automatizados entregados a empresas del Valle</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICIOS ================= -->
+<section class="section" id="servicios">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <span class="kicker" data-idx="/ 01">Servicios</span>
+      <h2>Cinco frentes para devolverle el tiempo a su operación.</h2>
+      <p>Cada servicio nace de un dolor real que vemos a diario en las empresas del Valle: hojas de cálculo que nadie debería unir a mano, tickets que se pierden y clientes que esperan.</p>
+    </div>
+
+    <div class="svc-list">
+      <!-- 01 · Bots de WhatsApp -->
+      <article class="svc" data-reveal>
+        <div class="svc-row">
+          <div class="svc-idx">
+            <span class="svc-num">/ 01</span>
+            <span class="svc-icon"><i data-lucide="bot" class="ic"></i></span>
+          </div>
+          <div class="svc-main">
+            <h3>Agentes de IA &amp; Bots de WhatsApp</h3>
+            <p>Atención <b>24/7</b>, calificación automática de leads y respuestas inmediatas en el canal que sus clientes ya usan. Mire una conversación real en acción:</p>
+            <a class="svc-link" data-wa="Hola Abelito Tech, me interesa un Agente de IA / Bot de WhatsApp para mi empresa. ¿Me cuentan más?">Automatizar mi atención<i data-lucide="arrow-up-right" class="ic"></i></a>
+          </div>
+          <div class="svc-visual">
+            <div class="chat" aria-hidden="true">
+              <div class="chat-head"><i data-lucide="message-circle" class="ic"></i>WhatsApp · Bot Abelito</div>
+              <div class="chat-body" id="chatBody"></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 02 · Consolidación Excel -->
+      <article class="svc" data-reveal>
+        <div class="svc-row">
+          <div class="svc-idx">
+            <span class="svc-num">/ 02</span>
+            <span class="svc-icon"><i data-lucide="table" class="ic"></i></span>
+          </div>
+          <div class="svc-main">
+            <h3>Consolidación de Datos &amp; Excel</h3>
+            <p>Unificación de ventas, inventarios y reportes de todas sus sedes <b>en un solo clic</b>. Se acabó el copy–paste de los viernes:</p>
+            <a class="svc-link" data-wa="Hola Abelito Tech, quiero consolidar mis reportes de Excel e inventarios en un solo clic. ¿Cómo funciona?">Unificar mis reportes<i data-lucide="arrow-up-right" class="ic"></i></a>
+          </div>
+          <div class="svc-visual">
+            <div class="files" aria-hidden="true">
+              <div class="filerow"><i data-lucide="file-spreadsheet" class="ic"></i>ventas_norte.xlsx<span class="arrow"><i data-lucide="arrow-right" class="ic"></i></span></div>
+              <div class="filerow"><i data-lucide="file-spreadsheet" class="ic"></i>inventario_centro.xlsx<span class="arrow"><i data-lucide="arrow-right" class="ic"></i></span></div>
+              <div class="filerow"><i data-lucide="file-spreadsheet" class="ic"></i>caja_sur.xlsx<span class="arrow"><i data-lucide="arrow-right" class="ic"></i></span></div>
+              <div class="filerow out"><i data-lucide="check" class="ic"></i>consolidado_maestro.xlsx</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03 · Software a medida -->
+      <article class="svc" data-reveal>
+        <div class="svc-row">
+          <div class="svc-idx">
+            <span class="svc-num">/ 03</span>
+            <span class="svc-icon"><i data-lucide="database" class="ic"></i></span>
+          </div>
+          <div class="svc-main">
+            <h3>Software a Medida &amp; Bases de Datos</h3>
+            <p>Aplicaciones de escritorio <b>.exe en Python</b>, bases de datos <b>PostgreSQL/SQLite</b> y portales web en <b>React</b>. Su operación, su lógica, su software.</p>
+            <a class="svc-link" data-wa="Hola Abelito Tech, necesito una aplicación a medida (escritorio .exe o portal web). Quiero hablar de mi caso.">Construir mi software<i data-lucide="arrow-up-right" class="ic"></i></a>
+          </div>
+          <div class="svc-visual">
+            <div class="chips" aria-hidden="true">
+              <span>Python</span><span>.exe de escritorio</span><span>PostgreSQL</span><span>SQLite</span><span>React</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 · Mesa de ayuda -->
+      <article class="svc" data-reveal>
+        <div class="svc-row">
+          <div class="svc-idx">
+            <span class="svc-num">/ 04</span>
+            <span class="svc-icon"><i data-lucide="life-buoy" class="ic"></i></span>
+          </div>
+          <div class="svc-main">
+            <h3>Mesa de Ayuda &amp; Monitoreo TI</h3>
+            <p>Trazabilidad de tickets, control de garantías y prevención de caídas bajo <b>marco ITIL</b>.</p>
+            <a class="svc-link" data-wa="Hola Abelito Tech, quiero una Mesa de Ayuda con monitoreo TI para mi empresa. ¿Qué incluye el SLA?">Delegar mi soporte<i data-lucide="arrow-up-right" class="ic"></i></a>
+          </div>
+          <div class="svc-visual">
+            <div class="tickets" aria-hidden="true">
+              <div class="ticket"><span class="tid">#T-214</span><span class="tdesc">Impresora facturación</span><span class="tstate wip">EN CURSO</span></div>
+              <div class="ticket"><span class="tid">#T-213</span><span class="tdesc">Garantía portátil Dell</span><span class="tstate open">ABIERTO</span></div>
+              <div class="ticket"><span class="tid">#T-212</span><span class="tdesc">Backup nocturno</span><span class="tstate done">RESUELTO</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 05 · Hardware -->
+      <article class="svc" data-reveal>
+        <div class="svc-row">
+          <div class="svc-idx">
+            <span class="svc-num">/ 05</span>
+            <span class="svc-icon"><i data-lucide="cpu" class="ic"></i></span>
+          </div>
+          <div class="svc-main">
+            <h3>Suministro &amp; Mantenimiento de Hardware</h3>
+            <p>Mini PCs, portátiles corporativos y repotenciación con <b>SSD NVMe</b>.</p>
+            <a class="svc-link" data-wa="Hola Abelito Tech, quiero cotizar equipamiento (mini PCs, portátiles o repotenciación con SSD).">Equipar mi empresa<i data-lucide="arrow-up-right" class="ic"></i></a>
+          </div>
+          <div class="svc-visual">
+            <span class="hw-badge"><i data-lucide="shield-check" class="ic"></i>GARANTÍA OFICIAL</span>
+            <div class="chips" aria-hidden="true">
+              <span>Mini PCs</span><span>Portátiles</span><span>SSD NVMe</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CASOS DE ÉXITO ================= -->
+<section class="section cases" id="casos">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <span class="kicker cyan" data-idx="/ 02">Casos de Éxito</span>
+      <h2>Resultados que se miden en horas, no en promesas.</h2>
+      <p>Tres operaciones del Valle que ya dejaron de hacer a mano lo que una máquina hace mejor.</p>
+    </div>
+    <div class="case-list">
+      <div class="case-row" data-reveal>
+        <div>
+          <div class="case-sector">Distribución · Logística</div>
+          <p class="case-quote">Catorce Excel distintos cada viernes. Hoy es un clic y un café, a las 7:00 a.m.</p>
+          <p class="case-author">J. Ramírez — Gerente de Operaciones, Distribuidora del Valle</p>
+        </div>
+        <div class="case-metric">
+          <div class="v">−14 h<span style="font-size:.5em">/sem</span></div>
+          <div class="l">en consolidación de reportes</div>
+        </div>
+      </div>
+      <div class="case-row" data-reveal style="--d:90ms">
+        <div>
+          <div class="case-sector">Odontología · Citas</div>
+          <p class="case-quote">El bot agenda, reconfirma y recuerda las citas. Mi recepción por fin respira y ya no perdemos turnos.</p>
+          <p class="case-author">M. Torres — Coordinadora de Servicio, Clínica Dental Sonrisa Valle</p>
+        </div>
+        <div class="case-metric">
+          <div class="v cy">24/7</div>
+          <div class="l">atención automática por WhatsApp</div>
+        </div>
+      </div>
+      <div class="case-row" data-reveal style="--d:180ms">
+        <div>
+          <div class="case-sector">Retail · Cadena regional</div>
+          <p class="case-quote">Con nuestra mesa de ayuda y el monitoreo proactivo de Abelito Tech, seis meses sin una sola caída en punto de venta.</p>
+          <p class="case-author">A. Becerra — Jefe de TI, Almacenes El Faro</p>
+        </div>
+        <div class="case-metric">
+          <div class="v em">0</div>
+          <div class="l">caídas en 6 meses · SLA &lt; 15 min</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CALCULADORA ROI (bloque invertido) ================= -->
+<section class="section roi-sec" id="automatizaciones">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <span class="kicker" data-idx="/ 03">Automatizaciones</span>
+      <h2>¿Cuánto le cuesta el trabajo manual? Haga la cuenta.</h2>
+      <p>Mueva los controles y vea en vivo el tiempo y el dinero que su empresa puede recuperar cada año.</p>
+    </div>
+
+    <div class="roi-wrap" data-reveal>
+      <div class="roi-panel">
+        <div class="roi-field">
+          <div class="roi-label">
+            <label for="rHoras">Horas semanales que su equipo gasta en tareas manuales</label>
+            <span class="val" id="rHorasVal">12 h/sem</span>
+          </div>
+          <input type="range" id="rHoras" class="range" min="2" max="40" step="1" value="12" style="--acc:#FF6B4A">
+          <div class="range-accents"><span>2 h</span><span>40 h</span></div>
+        </div>
+        <div class="roi-field">
+          <div class="roi-label">
+            <label for="rCosto">Costo promedio por hora de su equipo (COP)</label>
+            <span class="val cy" id="rCostoVal">$23.000</span>
+          </div>
+          <input type="range" id="rCosto" class="range" min="8000" max="80000" step="1000" value="23000" style="--acc:#06B6D4">
+          <div class="range-accents"><span>$8.000</span><span>$80.000</span></div>
+        </div>
+        <p class="roi-note">* Estimación conservadora: se automatiza en promedio el 80% de las tareas repetitivas, sobre 52 semanas laborales. El diagnóstico gratuito precisa el valor real de su caso.</p>
+      </div>
+
+      <div class="roi-out">
+        <div class="roi-out-head">
+          <span>Retorno proyectado</span>
+          <span class="st"><i></i>EN VIVO</span>
+        </div>
+        <div class="roi-big">
+          <div class="lbl">Horas recuperadas al año</div>
+          <div class="num" id="roiHoras">499 h</div>
+        </div>
+        <div class="roi-big">
+          <div class="lbl">Dinero recuperado estimado</div>
+          <div class="num money" id="roiDinero">$11.481.600 <small>COP/año</small></div>
+        </div>
+        <p class="roi-equiv">Equivale a <b id="roiDias">≈ 62 días laborales</b> de su equipo, <b id="roiMeses">≈ 3 meses</b> de jornada completa que vuelven a su operación.</p>
+        <button class="btn btn-primary" id="roiCTA">Quiero recuperar estas horas<i data-lucide="arrow-right" class="ic"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PLANES ================= -->
+<section class="section" id="planes" style="padding-top:0">
+  <div class="container">
+    <div class="sec-head center" data-reveal>
+      <span class="kicker" data-idx="/ 04">Planes</span>
+      <h2>Empiece pequeño. Escale cuando el retorno hable por sí solo.</h2>
+      <p>Todos los planes comienzan con un diagnóstico gratuito de 20 minutos.</p>
+    </div>
+
+    <div class="p-grid">
+      <article class="p-card" data-reveal>
+        <h3 class="p-name">Micro-Automatización</h3>
+        <p class="p-tag">Setup puntual — ideal para consolidar un Excel o automatizar un reporte.</p>
+        <div class="p-price"><span class="v">$100</span><span class="u">USD · pago único, desde</span></div>
+        <ul class="p-features">
+          <li><i data-lucide="check" class="ic"></i><span><b>1 automatización puntual</b>: reporte, consolidación o flujo de datos</span></li>
+          <li><i data-lucide="check" class="ic"></i><span>Entrega como <b>.exe visual</b> o flujo programado</span></li>
+          <li><i data-lucide="check" class="ic"></i><span>Capacitación de uso grabada</span></li>
+          <li><i data-lucide="check" class="ic"></i><span>30 días de garantía sobre la entrega</span></li>
+        </ul>
+        <button class="btn btn-ghost btn-block" data-wa="Hola Abelito Tech, quiero iniciar con el plan Micro-Automatización (setup puntual desde $100 USD).">Empezar con un flujo</button>
+      </article>
+
+      <article class="p-card pop" data-reveal style="--d:120ms">
+        <span class="p-badge">MÁS POPULAR</span>
+        <h3 class="p-name">Pyme Automatizada</h3>
+        <p class="p-tag">Mensualidad — sus flujos n8n, backups y soporte continuo, siempre encendidos.</p>
+        <div class="p-price"><span class="v">$290</span><span class="u">USD/mes, desde</span></div>
+        <ul class="p-features">
+          <li><i data-lucide="check" class="ic"></i><span><b>Flujos n8n gestionados</b>: bots, parsers y consolidaciones activas</span></li>
+          <li><i data-lucide="check" class="ic"></i><span><b>Backups automáticos</b> y monitoreo de bases de datos</span></li>
+          <li><i data-lucide="check" class="ic"></i><span>Soporte continuo con SLA prioritario</span></li>
+          <li><i data-lucide="check" class="ic"></i><span>Mejoras y nuevos flujos cada mes</span></li>
+          <li><i data-lucide="check" class="ic"></i><span>Panel de horas ahorradas en vivo</span></li>
+        </ul>
+        <button class="btn btn-primary btn-block" data-open-modal="modalDiag">Agendar diagnóstico gratuito</button>
+      </article>
+
+      <article class="p-card" data-reveal style="--d:240ms">
+        <h3 class="p-name">Tecnología Administrada</h3>
+        <p class="p-tag">Todo su ecosistema TI en una sola mano: hardware, software y soporte.</p>
+        <div class="p-price"><span class="v" style="font-size:26px;letter-spacing:-.01em">A medida</span></div>
+        <ul class="p-features">
+          <li><i data-lucide="check" class="ic"></i><span><b>Hardware corporativo</b> con garantía oficial de fabricante</span></li>
+          <li><i data-lucide="check" class="ic"></i><span>Software a medida incluido y evolutivo</span></li>
+          <li><i data-lucide="check" class="ic"></i><span>Soporte prioritario <b>SLA &lt; 15 minutos</b></span></li>
+          <li><i data-lucide="check" class="ic"></i><span>Mesa de ayuda ITIL y prevención de caídas</span></li>
+        </ul>
+        <button class="btn btn-ghost btn-block" data-wa="Hola Abelito Tech, quiero una propuesta del plan Tecnología Administrada (hardware + software + soporte prioritario).">Solicitar propuesta</button>
+      </article>
+    </div>
+    <p class="p-note" data-reveal>Precios en USD sin IVA · <b>Hardware con garantía oficial de fabricante</b> · Diagnóstico gratuito incluido en los tres planes.</p>
+  </div>
+</section>
+
+<!-- ================= CONTACTO ================= -->
+<section class="section rule-top" id="contacto">
+  <div class="container contact-wrap">
+    <div data-reveal>
+      <span class="kicker emerald" data-idx="/ 05">Contacto</span>
+      <h2 style="font-size:clamp(1.9rem,3.4vw,2.5rem);line-height:1.18;letter-spacing:-.025em;font-weight:800;margin:18px 0 14px">Cuéntenos qué proceso le quita tiempo.<br/>Lo demás es nuestro.</h2>
+      <p style="color:var(--ink-2)">Complete la auditoría exprés — 4 campos, 30 segundos. Un asesor humano la revisa y lo contacta.</p>
+      <ul class="contact-list">
+        <li><i data-lucide="check" class="ic"></i><span><b>Diagnóstico gratuito</b> de 20 minutos con un ingeniero</span></li>
+        <li><i data-lucide="check" class="ic"></i><span><b>Propuesta con alcance y precio</b> en menos de 48 horas</span></li>
+        <li><i data-lucide="check" class="ic"></i><span>Soporte con <b>SLA menor a 15 minutos</b> en horario laboral</span></li>
+      </ul>
+      <div class="direct">
+        <a href="tel:+573117985978"><i data-lucide="phone" class="ic"></i>+57 311 798 5978</a>
+        <a href="mailto:contacto@abelitotech.com"><i data-lucide="mail" class="ic"></i>contacto@abelitotech.com</a>
+        <a href="#" data-wa="Hola Abelito Tech, quiero agendar un diagnóstico gratuito."><i data-lucide="map-pin" class="ic"></i>Santiago de Cali, Colombia</a>
+      </div>
+    </div>
+
+    <form class="form-card" id="leadForm" data-reveal style="--d:120ms" novalidate>
+      <div class="f-row">
+        <div class="f-group">
+          <label for="fNombre">Nombre</label>
+          <input type="text" id="fNombre" name="nombre" placeholder="Ana Martínez" autocomplete="name"/>
+          <span class="f-msg">Escriba su nombre, por favor.</span>
+        </div>
+        <div class="f-group">
+          <label for="fEmpresa">Empresa / Sector</label>
+          <input type="text" id="fEmpresa" name="empresa" placeholder="Distribuidora XYZ · Retail" autocomplete="organization"/>
+          <span class="f-msg">Cuéntenos su empresa o sector.</span>
+        </div>
+      </div>
+      <div class="f-group">
+        <label for="fTel">Teléfono</label>
+        <input type="tel" id="fTel" name="telefono" placeholder="+57 300 000 0000" autocomplete="tel"/>
+        <span class="f-msg">Ingrese un teléfono válido (mínimo 7 dígitos).</span>
+      </div>
+      <div class="f-group">
+        <label for="fProc">¿Qué proceso desea automatizar?</label>
+        <textarea id="fProc" name="proceso" rows="3" maxlength="600" placeholder="Ej: unificar las ventas de 3 sedes que hoy llegan en Excel, y generar el reporte de cierre automáticamente…"></textarea>
+        <span class="f-msg">Descríbanos brevemente el proceso (mínimo 5 caracteres).</span>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" id="formBtn"><i data-lucide="send" class="ic"></i>Solicitar auditoría gratuita</button>
+      <p class="form-hint">Un asesor lo contacta en horario laboral. Sus datos no se comparten con terceros.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER (navy) ================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="brand">
+          <span class="logo-plate sm">
+            <img src="assets/logo-abelito-tech.jpg" alt="Abelito Tech"
+                 onerror="this.onerror=null;this.src='https://z-cdn-media.chatglm.cn/files/ff91708a-c2dd-4623-839b-6d835f52b555.jpg?auth_key=1890713018-542905ce0d644c46ab7c2bd015d86a4a-0-e442c5f907bd8dc04e184fdafab5c4b0'"/>
+          </span>
+        </a>
+        <p>Automatización de procesos, software a medida y tecnología administrada para las empresas de Cali y el Valle del Cauca.</p>
+      </div>
+      <div>
+        <h4>Explorar</h4>
+        <ul>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#automatizaciones">Calculadora ROI</a></li>
+          <li><a href="#casos">Casos de Éxito</a></li>
+          <li><a href="#planes">Planes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Soluciones</h4>
+        <ul>
+          <li><a href="#servicios">Bots de WhatsApp</a></li>
+          <li><a href="#servicios">Consolidación de Excel</a></li>
+          <li><a href="#servicios">Software a medida</a></li>
+          <li><a href="#servicios">Mesa de ayuda ITIL</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="tel:+573117985978">+57 311 798 5978</a></li>
+          <li><a href="mailto:contacto@abelitotech.com">contacto@abelitotech.com</a></li>
+          <li><a href="#" data-wa="Hola Abelito Tech, quiero hablar con un asesor.">WhatsApp directo</a></li>
+          <li><a href="#contacto">Santiago de Cali, Colombia</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Abelito Tech © 2026 · Santiago de Cali, Colombia</span>
+      <span class="mono">SLA &lt; 15 MIN · ITIL · TECNOLOGÍA A MEDIDA</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= WHATSAPP FLOTANTE ================= -->
+<a class="wa-float" href="https://wa.me/573117985978" data-wa="Hola Abelito Tech, vengo de su página web y quiero agendar un diagnóstico gratuito." aria-label="Chatear por WhatsApp">
+  <span class="wa-tip">Hablar ahora<span class="mono">respuesta &lt; 15 min</span></span>
+  <span class="wa-btn"><i data-lucide="phone" class="ic"></i></span>
+</a>
+
+<!-- ================= MODAL: DIAGNÓSTICO ================= -->
+<div class="modal-bg" id="modalDiag" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="diagTitle">
+    <button class="modal-close" data-close-modal aria-label="Cerrar"><i data-lucide="x" class="ic"></i></button>
+    <span class="kicker">Diagnóstico gratuito</span>
+    <h3 id="diagTitle">En 20 minutos detectamos sus mayores fugas de tiempo</h3>
+    <p class="msub">Una videollamada o café en Cali. Sin compromiso, sin tecnicismos.</p>
+    <ul class="m-bullets">
+      <li><i data-lucide="check" class="ic"></i><span>Revisamos sus <b>procesos manuales actuales</b>: reportes, Excel, soporte y bases de datos.</span></li>
+      <li><i data-lucide="check" class="ic"></i><span>Identificamos <b>2–3 automatizaciones</b> de impacto inmediato en su operación.</span></li>
+      <li><i data-lucide="check" class="ic"></i><span>Recibe una <b>propuesta con alcance, plazo y precio</b> — sin compromiso.</span></li>
+    </ul>
+    <div class="m-actions">
+      <a class="btn btn-primary btn-block" data-wa="Hola Abelito Tech, quiero agendar un diagnóstico gratuito de 20 minutos. ¿Cuándo pueden atenderme?" target="_blank" rel="noopener"><i data-lucide="message-circle" class="ic"></i>Continuar por WhatsApp</a>
+      <button class="btn btn-ghost btn-block" id="diagFormBtn">Prefiero dejar mis datos</button>
+    </div>
+    <p class="m-meta"><i data-lucide="timer" class="ic"></i>RESPUESTA EN MENOS DE 15 MINUTOS · LUN–SÁB</p>
+  </div>
+</div>
+
+<!-- ================= MODAL: DEMO .EXE ================= -->
+<div class="modal-bg" id="modalDemo" aria-hidden="true">
+  <div class="modal exe" role="dialog" aria-modal="true" aria-label="Demo del software AbelitoSync.exe">
+    <div class="exe-titlebar">
+      <span class="logo-plate xs">
+        <img src="assets/logo-abelito-tech.jpg" alt="Abelito Tech"
+             onerror="this.onerror=null;this.src='https://z-cdn-media.chatglm.cn/files/ff91708a-c2dd-4623-839b-6d835f52b555.jpg?auth_key=1890713018-542905ce0d644c46ab7c2bd015d86a4a-0-e442c5f907bd8dc04e184fdafab5c4b0'"/>
+      </span>
+      <span class="exe-name">AbelitoSync.exe — Automatización en ejecución</span>
+      <span class="exe-ctrl">
+        <button id="exeMin" title="Minimizar"><i data-lucide="minus" class="ic"></i></button>
+        <button id="exeMax" title="Maximizar"><i data-lucide="square" class="ic"></i></button>
+        <button class="close" data-close-modal title="Cerrar"><i data-lucide="x" class="ic"></i></button>
+      </span>
+    </div>
+    <div class="exe-body">
+      <div class="exe-prog"><span id="exeTask">Consolidando 14 reportes de Excel…</span><span class="mono" id="exePct">0%</span></div>
+      <div class="exe-track"><div class="exe-fill" id="exeFill"></div></div>
+      <div class="console" id="console"></div>
+      <div class="exe-foot">
+        <span class="exe-status" id="exeStatus"><i></i>EJECUTANDO · flujo «cierre diario»</span>
+        <button class="exe-rerun" id="exeRerun"><i data-lucide="refresh-cw" class="ic"></i>Ejecutar de nuevo</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Contenedor de toasts -->
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>
+(function(){
+'use strict';
+const WA_NUM = '573117985978';
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const icons = () => { if (window.lucide) lucide.createIcons(); };
+icons();
+
+const waLink = msg => `https://wa.me/${WA_NUM}?text=${encodeURIComponent(msg)}`;
+const escapeHtml = value => String(value).replace(/[&<>\"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[ch]));
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+/* ---------- Toasts ---------- */
+function toast(title, msg, opts = {}){
+  const box = $('#toasts');
+  const el = document.createElement('div');
+  el.className = 'toast' + (opts.type === 'warn' ? ' warn' : '');
+  const icon = opts.type === 'warn' ? 'info' : 'check';
+  el.innerHTML = `
+    <span class="t-ic"><i data-lucide="${icon}" class="ic"></i></span>
+    <span class="t-tx"><b>${escapeHtml(title)}</b><p>${escapeHtml(msg)}</p>
+      ${opts.action ? `<a class="t-act" target="_blank" rel="noopener" href="${opts.action}">${opts.actionLabel || 'Ir'}<i data-lucide="arrow-up-right" class="ic" style="width:13px;height:13px"></i></a>` : ''}
+    </span>
+    <button class="t-x" aria-label="Cerrar"><i data-lucide="x" class="ic"></i></button>`;
+  box.appendChild(el); icons();
+  const kill = () => { el.classList.add('out'); setTimeout(() => el.remove(), 300); };
+  el.querySelector('.t-x').addEventListener('click', kill);
+  setTimeout(kill, opts.duration || 6000);
+}
+
+/* ---------- Navegación: scroll, menú móvil, scrollspy ---------- */
+const nav = $('#nav');
+addEventListener('scroll', () => nav.querySelector('.nav').classList.toggle('scrolled', scrollY > 10), {passive:true});
+const burger = $('#burger'), mMenu = $('#mobileMenu');
+burger.addEventListener('click', () => {
+  const open = mMenu.classList.toggle('open');
+  burger.setAttribute('aria-expanded', String(open));
+  burger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+});
+const closeMobileMenu = () => { mMenu.classList.remove('open'); burger.setAttribute('aria-expanded','false'); burger.setAttribute('aria-label','Abrir menú'); };
+mMenu.querySelectorAll('a,button').forEach(a => a.addEventListener('click', closeMobileMenu));
+addEventListener('resize', () => { if (innerWidth > 900) closeMobileMenu(); }, {passive:true});
+
+const spyLinks = $$('.nav-links a');
+const spyMap = {};
+spyLinks.forEach(a => spyMap[a.getAttribute('href').slice(1)] = a);
+const spy = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting){
+      spyLinks.forEach(a => a.classList.remove('active'));
+      const l = spyMap[e.target.id]; if (l) l.classList.add('active');
+    }
+  });
+}, {rootMargin:'-35% 0px -60% 0px'});
+['servicios','automatizaciones','casos','planes','contacto'].forEach(id => { const s = document.getElementById(id); if (s) spy.observe(s); });
+
+/* ---------- Aparición al hacer scroll ---------- */
+const reveal = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); reveal.unobserve(e.target); } });
+}, {threshold:.15});
+ $$('[data-reveal]').forEach(el => reveal.observe(el));
+
+/* ---------- Enlaces a WhatsApp (delegación global) ---------- */
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-wa]');
+  if (!t) return;
+  e.preventDefault();
+  window.open(waLink(t.dataset.wa), '_blank', 'noopener');
+});
+
+/* ---------- Contadores de la barra de métricas ---------- */
+function countUp(el){
+  const target = parseFloat(el.dataset.count), dur = 1500, t0 = performance.now();
+  const fmt = v => Math.round(v).toLocaleString('es-CO');
+  (function frame(t){
+    const p = Math.min(1, (t - t0) / dur);
+    const eased = 1 - Math.pow(1 - p, 4);
+    el.textContent = fmt(target * eased);
+    if (p < 1) requestAnimationFrame(frame); else el.textContent = fmt(target);
+  })(t0);
+}
+new IntersectionObserver((entries, obs) => {
+  entries.forEach(e => {
+    if (e.isIntersecting){ e.target.querySelectorAll('[data-count]').forEach(countUp); obs.unobserve(e.target); }
+  });
+}, {threshold:.35}).observe($('#statsGrid'));
+
+/* ---------- Métricas "vivas" de la nota al margen ---------- */
+let mH = 23.5, mD = 128;
+setInterval(() => {
+  mD += Math.floor(Math.random() * 4) + 1;
+  if (Math.random() > .5) mH = Math.min(24.2, mH + .1);
+  const h = $('#mHoras'), d = $('#mDocs');
+  if (h) h.textContent = mH.toFixed(1) + ' h';
+  if (d) d.textContent = mD;
+}, 3200);
+
+/* Bucle de la barra de consolidación */
+(async function progressLoop(){
+  const fill = $('#progFill'), pct = $('#progPct');
+  while (fill){
+    fill.style.width = '0%'; pct.textContent = '0%';
+    await sleep(500);
+    for (let i = 0; i <= 98; i += 2){
+      fill.style.width = i + '%'; pct.textContent = i + '%';
+      await sleep(70);
+    }
+    pct.textContent = '98%';
+    await sleep(2600);
+  }
+})();
+
+/* ---------- Mini-chat del bot (servicio 01) ---------- */
+(async function chatLoop(){
+  const body = $('#chatBody');
+  if (!body) return;
+  const script = [
+    {from:'u', txt:'Hola, ¿tienen disponibilidad esta semana?'},
+    {from:'b', txt:'¡Hola! Sí, tenemos cupos desde el jueves 8 a.m. ¿Desea que le agende la visita técnica?'},
+    {from:'u', txt:'Sí, y ¿me pueden enviar la cotización?'},
+    {from:'b', txt:'Listo: ya se la envié por este chat y quedó registrada en su historial del CRM. ¿Algo más en lo que le ayude?'}
+  ];
+  while (true){
+    body.innerHTML = '';
+    for (const m of script){
+      if (m.from === 'b'){
+        const t = document.createElement('div');
+        t.className = 'typing'; t.innerHTML = '<i></i><i></i><i></i>';
+        body.appendChild(t);
+        await sleep(950);
+        t.remove();
+      } else await sleep(600);
+      const msg = document.createElement('div');
+      msg.className = 'msg ' + m.from; msg.textContent = m.txt;
+      body.appendChild(msg);
+      await sleep(1200);
+    }
+    const chips = document.createElement('div');
+    chips.className = 'chat-chips';
+    chips.innerHTML = '<span>Agendar visita</span><span>Ver planes</span>';
+    body.appendChild(chips);
+    await sleep(3400);
+  }
+})();
+
+/* ---------- Calculadora ROI ---------- */
+const rH = $('#rHoras'), rC = $('#rCosto');
+const nfCOP = new Intl.NumberFormat('es-CO', {style:'currency', currency:'COP', maximumFractionDigits:0});
+function paintRange(el){
+  const p = (el.value - el.min) / (el.max - el.min) * 100;
+  el.style.setProperty('--p', p + '%');
+}
+function calcROI(){
+  const h = +rH.value, costo = +rC.value;
+  $('#rHorasVal').textContent = h + ' h/sem';
+  $('#rCostoVal').textContent = nfCOP.format(costo);
+  const horasAnio = Math.round(h * 52 * .8);
+  const dinero = horasAnio * costo;
+  $('#roiHoras').textContent = horasAnio.toLocaleString('es-CO') + ' h';
+  $('#roiDinero').innerHTML = nfCOP.format(dinero) + ' <small>COP/año</small>';
+  $('#roiDias').textContent = '≈ ' + Math.round(horasAnio / 8).toLocaleString('es-CO') + ' días laborales';
+  $('#roiMeses').textContent = '≈ ' + (horasAnio / 168).toFixed(1).replace('.', ',') + ' meses';
+  paintRange(rH); paintRange(rC);
+  $('#roiCTA').dataset.wa = `Hola Abelito Tech, mi equipo pierde ~${h} h/semana en tareas manuales. Según su calculadora puedo recuperar ≈${horasAnio.toLocaleString('es-CO')} h/año (${nfCOP.format(dinero)} COP). Quiero un diagnóstico gratuito.`;
+}
+[rH, rC].forEach(el => el.addEventListener('input', calcROI));
+calcROI();
+
+/* ---------- Modales ---------- */
+let lastFocus = null;
+function openModal(id){
+  const m = document.getElementById(id);
+  if (!m) return;
+  lastFocus = document.activeElement;
+  m.classList.add('open'); m.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  const first = m.querySelector('button,a,input,textarea,[tabindex]:not([tabindex="-1"])');
+  if (first) setTimeout(() => first.focus(), 30);
+  if (id === 'modalDemo') runDemo();
+}
+function closeModal(m){
+  if (!m) return;
+  m.classList.remove('open'); m.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  if (m.id === 'modalDemo') stopDemo();
+  if (lastFocus && document.contains(lastFocus)) setTimeout(() => lastFocus.focus(), 30);
+}
+document.addEventListener('click', e => {
+  const opener = e.target.closest('[data-open-modal]');
+  if (opener){ openModal(opener.dataset.openModal); return; }
+  if (e.target.closest('[data-close-modal]')){ closeModal(e.target.closest('.modal-bg')); return; }
+  if (e.target.classList.contains('modal-bg')) closeModal(e.target);
+});
+document.addEventListener('keydown', e => {
+  const active = $('.modal-bg.open');
+  if (!active) return;
+  if (e.key === 'Escape') { closeModal(active); return; }
+  if (e.key === 'Tab') {
+    const focusable = [...active.querySelectorAll('button,a,input,textarea,[tabindex]:not([tabindex="-1"])')].filter(el => !el.disabled);
+    if (!focusable.length) return;
+    const first = focusable[0], last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
+ $('#diagFormBtn').addEventListener('click', () => {
+  closeModal($('#modalDiag'));
+  $('#contacto').scrollIntoView({behavior:'smooth'});
+  setTimeout(() => $('#fNombre').focus({preventScroll:true}), 700);
+});
+
+/* ---------- Demo .exe: consola en vivo ---------- */
+let demoTimers = [];
+const stopDemo = () => { demoTimers.forEach(clearTimeout); demoTimers = []; };
+function ts(offset){
+  const d = new Date(Date.now() + offset * 1000);
+  const p = n => String(n).padStart(2, '0');
+  return `[${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}]`;
+}
+function runDemo(){
+  stopDemo();
+  const cons = $('#console'), fill = $('#exeFill'), pct = $('#exePct'),
+        st = $('#exeStatus'), rerun = $('#exeRerun'), task = $('#exeTask');
+  cons.innerHTML = ''; fill.style.width = '0%'; pct.textContent = '0%';
+  st.className = 'exe-status'; st.innerHTML = '<i></i>EJECUTANDO · flujo «cierre diario»';
+  rerun.classList.remove('ready');
+  task.textContent = 'Consolidando 14 reportes de Excel…';
+
+  const lines = [
+    {c:'',      t:'AbelitoSync <b>v2.4.1</b> — iniciando flujo «cierre diario»', d:400},
+    {c:'info',  t:'Escaneando carpeta \\\\servidor\\facturas\\ … <b>47 archivos</b> detectados', d:900},
+    {c:'',      t:'Parseando <b>FAC-2026-0231.pdf</b> (OCR + IA) … <b>OK</b> en 1.2 s', d:1100},
+    {c:'',      t:'Extracción de líneas de ítems: <b>38 registros</b> validados', d:700},
+    {c:'info',  t:'Consolidando <b>14 reportes de Excel</b> de sedes…', d:900},
+    {c:'',      t:'Transformaciones de moneda y limpieza de duplicados … <b>OK</b>', d:800},
+    {c:'ok',    t:'PostgreSQL <b>[ventas_db]</b> … sincronizado', d:900},
+    {c:'ok',    t:'SQLite local <b>[caja.s3db]</b> … sincronizado', d:600},
+    {c:'info',  t:'Generando reporte maestro <b>cierre_diario.xlsx</b> …', d:900},
+    {c:'ok',    t:'Resumen enviado al WhatsApp del gerente … entregado', d:700},
+    {c:'ok',    t:'Flujo completado — <b>3.4 h manuales evitadas</b> hoy', d:600}
+  ];
+  let acc = 0, sec = 0;
+  lines.forEach((l, i) => {
+    acc += l.d;
+    demoTimers.push(setTimeout(() => {
+      const row = document.createElement('div');
+      row.className = 'cl ' + l.c;
+      row.innerHTML = `<span class="ts">${ts(sec)}</span><span class="tx">${l.t}</span>`;
+      cons.appendChild(row);
+      cons.scrollTop = cons.scrollHeight;
+      sec += Math.round(l.d / 1000) + (i % 3 === 0 ? 1 : 0);
+    }, acc));
+    const prog = Math.round((i + 1) / lines.length * 100);
+    demoTimers.push(setTimeout(() => {
+      fill.style.width = prog + '%'; pct.textContent = prog + '%';
+    }, acc));
+  });
+  demoTimers.push(setTimeout(() => {
+    st.className = 'exe-status done';
+    st.innerHTML = '<i></i>COMPLETADO SIN ERRORES · 3.4 h ahorradas';
+    task.textContent = 'Cierre diario consolidado — 14 sedes';
+    rerun.classList.add('ready');
+  }, acc + 400));
+}
+ $('#exeRerun').addEventListener('click', runDemo);
+ $('#exeMax').addEventListener('click', () => {
+  const w = $('#modalDemo .exe');
+  w.classList.toggle('maxi');
+  if (w.classList.contains('maxi')) toast('Ventana maximizada', 'Modo pantalla completa del ejecutable. Vuelva a pulsar para restaurar.', {duration:3500});
+});
+ $('#exeMin').addEventListener('click', () => {
+  const w = $('#modalDemo .exe');
+  w.classList.add('mini');
+  setTimeout(() => w.classList.remove('mini'), 900);
+  toast('Ventana minimizada', 'AbelitoSync.exe sigue ejecutándose en segundo plano.', {duration:3500});
+});
+
+/* ---------- Formulario de auditoría ---------- */
+const form = $('#leadForm'), formBtn = $('#formBtn');
+const fields = {
+  fNombre: v => v.trim().length >= 2,
+  fEmpresa: v => v.trim().length >= 2,
+  fTel: v => (v.replace(/\D/g, '').length >= 7),
+  fProc: v => v.trim().length >= 5
+};
+Object.keys(fields).forEach(id => {
+  document.getElementById(id).addEventListener('input', e => e.target.closest('.f-group').classList.remove('err'));
+});
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  let ok = true;
+  Object.entries(fields).forEach(([id, test]) => {
+    const input = document.getElementById(id);
+    const valid = test(input.value);
+    input.closest('.f-group').classList.toggle('err', !valid);
+    if (!valid) ok = false;
+  });
+  if (!ok){ toast('Revise el formulario', 'Hay campos incompletos. Están marcados en naranja.', {type:'warn'}); return; }
+  formBtn.disabled = true;
+  formBtn.innerHTML = '<span class="spinner"></span>Enviando…';
+  const data = {
+    nombre: $('#fNombre').value.trim(),
+    empresa: $('#fEmpresa').value.trim(),
+    telefono: $('#fTel').value.trim(),
+    proceso: $('#fProc').value.trim()
+  };
+  setTimeout(() => {
+    formBtn.disabled = false;
+    formBtn.innerHTML = '<i data-lucide="send" class="ic"></i>Solicitar auditoría gratuita'; icons();
+    form.reset();
+    toast('Solicitud recibida, ' + data.nombre.split(' ')[0],
+      'Su solicitud quedó preparada. Un asesor revisará su caso («' + data.proceso.slice(0, 60) + (data.proceso.length > 60 ? '…' : '') + '») y lo contactará en horario laboral.',
+      {action: waLink(`Hola Abelito Tech, soy ${data.nombre} de ${data.empresa}. Acabo de enviar el formulario: quiero automatizar «${data.proceso}». Mi teléfono: ${data.telefono}.`),
+       actionLabel: 'Acelerar por WhatsApp', duration: 9000});
+  }, 900);
+});
+})();
+</script>
+</body>
+</html>
