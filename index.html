@@ -68,7 +68,7 @@ button:disabled{cursor:wait;opacity:.7}
 /* ============ LOGO OFICIAL ============ */
 .brand{display:inline-flex;align-items:center}
 .logo-plate{display:inline-flex;align-items:center;background:none;padding:0;line-height:0}
-.logo-plate img{display:block;height:82px;width:auto;filter:url(#logoKey)}
+.logo-plate img{display:block;height:82px;width:auto}
 .logo-plate.xs img{height:18px}
 
 /* ============ NAVEGACIÓN (barra blanca) ============ */
@@ -472,27 +472,12 @@ button:disabled{cursor:wait;opacity:.7}
 <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
 <noscript><div class="noscript-banner">Este demo funciona mejor con JavaScript activado para mostrar las demostraciones y las interacciones.</div></noscript>
 
-<!-- ============ FILTRO DEL LOGO ============ -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <defs>
-    <filter id="logoKey" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%">
-      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -1 -1 -1 3 0" result="keyed"/>
-      <feComponentTransfer in="keyed">
-        <feFuncR type="identity"/>
-        <feFuncG type="identity"/>
-        <feFuncB type="identity"/>
-        <feFuncA type="gamma" amplitude="1" exponent="2" offset="0"/>
-      </feComponentTransfer>
-    </filter>
-  </defs>
-</svg>
-
 <!-- ================= NAVEGACIÓN (barra blanca) ================= -->
 <header class="nav" id="nav">
   <div class="container nav-inner">
     <a href="#" class="brand">
       <span class="logo-plate">
-        <img src="assets/logo-abelito-tech.png" alt="Abelito Tech"
+        <img src="assets/logo-abelito-tech.jpg" alt="Abelito Tech"
              data-onerror-removed="true"/>
       </span>
     </a>
@@ -1030,7 +1015,7 @@ button:disabled{cursor:wait;opacity:.7}
       <div class="footer-brand">
         <a href="#" class="brand">
           <span class="logo-plate sm">
-            <img src="assets/logo-abelito-tech.png" alt="Abelito Tech"
+            <img src="assets/logo-abelito-tech.jpg" alt="Abelito Tech"
    />
           </span>
         </a>
@@ -1102,7 +1087,7 @@ button:disabled{cursor:wait;opacity:.7}
   <div class="modal exe" role="dialog" aria-modal="true" aria-label="Demostración del software AbelitoSync.exe">
     <div class="exe-titlebar">
       <span class="logo-plate xs">
-        <img src="assets/logo-abelito-tech.png" alt="Abelito Tech"
+        <img src="assets/logo-abelito-tech.jpg" alt="Abelito Tech"
              data-onerror-removed="true"/>
       </span>
       <span class="exe-name">AbelitoSync.exe — Demostración</span>
